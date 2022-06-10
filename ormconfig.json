@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "host.docker.internal",
+  "port": 5412,
+  "username": "postgres",
+  "password": "samplePassword",
+  "database": "learn_databases",
+  "migrationsTableName": "migrations",
+  "migrationsRun": true,
+  "logging": true,
+  "synchronize": false,
+  "entities": ["dist/**/*.entity.{ts,js}"],
+  "migrations": ["dist/**/migrations/*.{ts,js}"],
+  "cli": {
+    "migrationsDir": "src/migrations"
+  }
+}
