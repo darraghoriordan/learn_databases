@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.958">
-  <testsuite name="Test the data base connection" errors="0" failures="0" skipped="0" timestamp="2022-06-10T11:15:38" time="0.932" tests="1">
-    <testcase classname="Test the data base connection should be able to select 1" name="Test the data base connection should be able to select 1" time="0.132">
+<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.952">
+  <testsuite name="Test the data base connection" errors="0" failures="0" skipped="0" timestamp="2022-06-10T11:29:19" time="0.92" tests="1">
+    <testcase classname="Test the data base connection should be able to select 1" name="Test the data base connection should be able to select 1" time="0.118">
     </testcase>
   </testsuite>
 </testsuites>
