@@ -12,8 +12,8 @@ class AppDataSource {
     migrationsRun: true,
     logging: true,
     synchronize: false,
-    entities: ["dist/**/*.entity.{ts,js}"],
-    migrations: ["dist/**/migrations/*.{ts,js}"],
+    entities: ["**/*.entity.{ts,js}"],
+    migrations: ["**/migrations/*.{ts,js}"],
   });
 
   public static async connection(): Promise<DataSource> {

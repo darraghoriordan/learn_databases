@@ -1,10 +1,6 @@
-import AppDataSource from "./appDatasource";
+import AppDataSource from "../database-connection/appDatasource";
 
-afterAll(async () => {
-  await AppDataSource.closeConnections();
-});
-
-describe("Test the data base connection", () => {
+describe("When testing the data base connection", () => {
   it("should be able to select 1", async () => {
     const connection = await AppDataSource.connection();
     // eslint-disable-next-line @typescript-eslint/await-thenable
@@ -12,8 +8,7 @@ describe("Test the data base connection", () => {
     const selection = (await queryRunner.manager.query(
       "SELECT 1 as TestResult"
     )) as [{ testresult: number }];
-    console.log(selection);
-    console.log(selection[0]);
+
     return expect(selection[0].testresult).toBe(1);
   });
 });

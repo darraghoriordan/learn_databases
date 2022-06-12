@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.952">
-  <testsuite name="Test the data base connection" errors="0" failures="0" skipped="0" timestamp="2022-06-10T11:29:19" time="0.92" tests="1">
-    <testcase classname="Test the data base connection should be able to select 1" name="Test the data base connection should be able to select 1" time="0.118">
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="6.924">
+  <testsuite name="When selecting data" errors="0" failures="0" skipped="0" timestamp="2022-06-11T11:15:36" time="2.717" tests="3">
+    <testcase classname="When selecting data can inset using type orm data model" name="When selecting data can inset using type orm data model" time="0.056">
+    </testcase>
+    <testcase classname="When selecting data can retrieve all entries" name="When selecting data can retrieve all entries" time="0.005">
+    </testcase>
+    <testcase classname="When selecting data can retrieve specific entries" name="When selecting data can retrieve specific entries" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="When inserting data" errors="0" failures="0" skipped="0" timestamp="2022-06-11T11:15:39" time="2.117" tests="1">
+    <testcase classname="When inserting data can insert using type orm data model" name="When inserting data can insert using type orm data model" time="0.06">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test the data base connection" errors="0" failures="0" skipped="0" timestamp="2022-06-11T11:15:41" time="2.058" tests="1">
+    <testcase classname="Test the data base connection should be able to select 1" name="Test the data base connection should be able to select 1" time="1.863">
     </testcase>
   </testsuite>
 </testsuites>
