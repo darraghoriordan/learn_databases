@@ -7,6 +7,7 @@ describe("When updating data", () => {
     const connection = await AppDataSource.connection();
     const queryRunner = connection.createQueryRunner();
     await queryRunner.manager.query("DELETE FROM pet_owner");
+    await queryRunner.release();
   });
 
   const mikeOwner = new PetOwner();
