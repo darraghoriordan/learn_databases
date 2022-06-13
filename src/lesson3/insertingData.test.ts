@@ -7,6 +7,7 @@ describe("When inserting data", () => {
     const connection = await AppDataSource.connection();
     const queryRunner = connection.createQueryRunner();
     await queryRunner.manager.query("DELETE FROM pet_owner");
+    await queryRunner.release();
   });
 
   it("can insert using type orm data model", async () => {
