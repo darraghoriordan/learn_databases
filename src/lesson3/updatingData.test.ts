@@ -1,6 +1,5 @@
 import AppDataSource from "../database-connection/appDatasource";
 import { PetOwner } from "../pet-modelling/pet-owner.entity";
-import { Pet } from "../pet-modelling/pet.entity";
 
 describe("When updating data", () => {
   // first we delete all entries
