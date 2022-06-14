@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Pet } from "./pet.entity";
 
