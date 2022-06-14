@@ -1,5 +1,6 @@
 import AppDataSource from "../database-connection/appDatasource";
 import { PetOwner } from "../pet-modelling/pet-owner.entity";
+import { Pet } from "../pet-modelling/pet.entity";
 
 describe("When updating data", () => {
   // first we delete all entries
@@ -37,7 +38,8 @@ describe("When updating data", () => {
     expect(foundMikes.length).toBe(1);
 
     // update the name
-    await petOwnerRepository.update(foundMikes[0], {
+
+    await petOwnerRepository.update(foundMikes[0].id, {
       name: "this is an even newer name",
     });
     const findNewMikeEntries = await petOwnerRepository.findBy({
