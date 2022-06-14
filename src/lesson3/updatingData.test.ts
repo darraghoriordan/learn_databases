@@ -1,7 +1,7 @@
 import AppDataSource from "../database-connection/appDatasource";
 import { PetOwner } from "../pet-modelling/pet-owner.entity";
 
-describe("When updating data", () => {
+describe("When updating data in a single table", () => {
   // first we delete all entries
   beforeAll(async () => {
     const connection = await AppDataSource.connection();

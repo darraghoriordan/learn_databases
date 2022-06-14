@@ -6,11 +6,11 @@
   "password": "samplePassword",
   "database": "learn_databases",
   "migrationsTableName": "migrations",
-  "migrationsRun": true,
+  "migrationsRun": false,
   "logging": true,
   "synchronize": false,
-  "entities": ["dist/**/*.entity.{ts,js}"],
-  "migrations": ["dist/**/migrations/*.{ts,js}"],
+  "entities": ["dist/**/*.entity.js"],
+  "migrations": ["dist/**/migrations/*.js"],
   "cli": {
     "migrationsDir": "src/migrations"
   }

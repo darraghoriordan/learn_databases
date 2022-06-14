@@ -8,7 +8,7 @@ export const connectionSource = new DataSource({
   password: "samplePassword",
   database: "learn_databases",
   migrationsTableName: "migrations",
-  migrationsRun: true,
+  migrationsRun: false,
   logging: true,
   synchronize: false,
   entities: ["**/*.entity.{ts,js}"],

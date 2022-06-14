@@ -15,7 +15,7 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "typeorm:migration:generate": "npm run typeorm -- migration:generate ./src/migrations/ormmigration -d ./src/database-connection/appDatasource",
     "typeorm:migration:run": "npm run typeorm -- migration:run -d ./src/database-connection/appDatasource",
-    "typeorm:migration:revert": "npm run typeorm -- migration:revert"
+    "typeorm:migration:revert": "npm run typeorm -- migration:revert -d ./src/database-connection/appDatasource"
   },
   "dependencies": {
     "pg": "8.7.3",
