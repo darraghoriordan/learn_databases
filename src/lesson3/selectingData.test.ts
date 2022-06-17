@@ -1,13 +1,11 @@
 import AppDataSource from "../database-connection/appDatasource";
 import { PetOwner } from "../pet-modelling/pet-owner.entity";
+import { cleanAllPetRecords } from "./databaseAdmin";
 
 describe("When selecting data from a single table", () => {
   // first we delete all entries
   beforeAll(async () => {
-    const connection = await AppDataSource.connection();
-    const queryRunner = connection.createQueryRunner();
-    await queryRunner.manager.query("DELETE FROM pet_owner");
-    await queryRunner.release();
+    return cleanAllPetRecords();
   });
 
   const mikeOwner = new PetOwner();

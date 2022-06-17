@@ -8,7 +8,7 @@
     "up": "mkdir -p ./.docker-compose/.persist/postgres && docker compose up -d",
     "down": "docker compose down",
     "destroy": "yarn down && rm -rf .docker-compose",
-    "prebuild": "rimraf dist",
+    "prebuild": "rm -rf dist",
     "build": "tsc --project tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "test": "yarn build && jest --runInBand",
