@@ -2,10 +2,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class PetProfile {
+export class PetL3 {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
-  isHouseTrained!: boolean;
+  name!: string;
+
+  @Column()
+  ownerName!: string;
 }

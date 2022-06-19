@@ -9,6 +9,7 @@ export const connectionSource = new DataSource({
   database: "learn_databases",
   migrationsTableName: "migrations",
   migrationsRun: false,
+  schema: "walkingapp",
   logging: true,
   synchronize: false,
   entities: ["**/*.entity.{ts,js}"],

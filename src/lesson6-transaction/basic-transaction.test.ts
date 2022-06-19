@@ -1,8 +1,7 @@
 /* eslint-disable sonarjs/no-identical-functions */
 import { EntityManager } from "typeorm";
 import AppDataSource from "../database-connection/appDatasource";
-import { PetOwner } from "../pet-modelling/pet-owner.entity";
-import { Pet } from "../pet-modelling/pet.entity";
+import { PetOwner } from "../lesson4/pet-modelling/pet-owner.entity";
 
 const testTransaction = async (): Promise<void> => {
   const connection = await AppDataSource.connection();
@@ -10,23 +9,23 @@ const testTransaction = async (): Promise<void> => {
   const petOwner = new PetOwner();
   petOwner.name = "tx_owner";
 
-  const pet1 = new Pet();
-  pet1.name = "tx pet 1";
-  pet1.owner = petOwner;
-  pet1.type = "cat";
+  //   const pet1 = new Pet();
+  //   pet1.name = "tx pet 1";
+  //   pet1.owner = petOwner;
+  //   pet1.type = "cat";
 
-  const pet2 = new Pet();
-  pet2.name = "tx pet 2";
-  pet2.owner = petOwner;
-  pet2.type = "dog";
+  //   const pet2 = new Pet();
+  //   pet2.name = "tx pet 2";
+  //   pet2.owner = petOwner;
+  //   pet2.type = "dog";
 
   await queryRunner.connect();
   await queryRunner.startTransaction();
   try {
     async (transactionalEntityManager: EntityManager) => {
       await transactionalEntityManager.save(petOwner);
-      await transactionalEntityManager.save(pet1);
-      await transactionalEntityManager.save(pet2);
+      //  await transactionalEntityManager.save(pet1);
+      //  await transactionalEntityManager.save(pet2);
     };
   } catch {
     // since we have errors lets rollback the changes we made
