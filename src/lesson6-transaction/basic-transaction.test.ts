@@ -1,33 +1,30 @@
 /* eslint-disable sonarjs/no-identical-functions */
-import { EntityManager } from "typeorm";
 import AppDataSource from "../database-connection/appDatasource";
-import { clearRecords } from "../lesson4/databaseCleaner";
-import { PetOwner } from "../lesson4/pet-modelling/pet-owner.entity";
+import { cleanAllPetRecords } from "../lesson3/databaseAdmin";
+import { PetL3 as Pet } from "../lesson3/models/pet.entity";
 
 const testTransaction = async (): Promise<void> => {
   const connection = await AppDataSource.connection();
   const queryRunner = connection.createQueryRunner();
-  const petOwner = new PetOwner();
-  petOwner.name = "tx_owner";
 
-  //   const pet1 = new Pet();
-  //   pet1.name = "tx pet 1";
-  //   pet1.owner = petOwner;
-  //   pet1.type = "cat";
+  // create a new pet
+  const petToSave1 = new Pet();
+  petToSave1.name = "bobby the dog";
+  petToSave1.ownerName = "tx_owner";
 
-  //   const pet2 = new Pet();
-  //   pet2.name = "tx pet 2";
-  //   pet2.owner = petOwner;
-  //   pet2.type = "dog";
+  // create a new pet
+  const petToSave2 = new Pet();
+  petToSave2.name = "bobby the dog";
+  petToSave2.ownerName = "tx_owner";
 
   await queryRunner.connect();
   await queryRunner.startTransaction();
+
   try {
-    async (transactionalEntityManager: EntityManager) => {
-      await transactionalEntityManager.save(petOwner);
-      //  await transactionalEntityManager.save(pet1);
-      //  await transactionalEntityManager.save(pet2);
-    };
+    await queryRunner.manager.save(petToSave1);
+    await queryRunner.manager.save(petToSave2);
+
+    await queryRunner.commitTransaction();
   } catch {
     // since we have errors lets rollback the changes we made
     await queryRunner.rollbackTransaction();
@@ -40,18 +37,23 @@ const testTransaction = async (): Promise<void> => {
 describe("When updating data", () => {
   // first we delete all entries
   beforeAll(async () => {
-    await clearRecords();
+    await cleanAllPetRecords();
   });
 
   it("can use a transaction", async () => {
+    // run the tx above
     await expect(testTransaction()).resolves.toBeUndefined();
+
+    // try to get the results
     const connection = await AppDataSource.connection();
-    const petOwnerRepository = connection.getRepository(PetOwner);
-    const newEntries = await petOwnerRepository.findBy({ name: "tx_owner" });
-    expect(newEntries.length).toBe(1);
+    const petRepository = connection.getRepository(Pet);
+    const newEntries = await petRepository.findBy({
+      ownerName: "tx_owner",
+    });
+    expect(newEntries.length).toBe(2);
   });
 
   afterAll(async () => {
-    await clearRecords();
+    await cleanAllPetRecords();
   });
 });
