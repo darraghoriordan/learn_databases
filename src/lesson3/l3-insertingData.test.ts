@@ -2,7 +2,7 @@
 import { InsertResult } from "typeorm";
 import AppDataSource from "../database-connection/appDatasource";
 import { cleanAllPetRecords } from "./databaseAdmin";
-import { PetL3 as Pet } from "./models/petl3.entity";
+import { PetL3 as Pet } from "./models/pet.entity";
 
 describe("When inserting data to a single table", () => {
   // first we delete all existing entries to have a clean database

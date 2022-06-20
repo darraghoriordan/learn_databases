@@ -1,15 +1,18 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export class ormmigration1655636293153 implements MigrationInterface {
-  name = "ormmigration1655636293153";
+export class ormmigration1655692579973 implements MigrationInterface {
+  name = "ormmigration1655692579973";
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `CREATE TABLE "walkingapp"."emergency_contact" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "address" character varying NOT NULL, "mobilePhone" character varying NOT NULL, "homePhone" character varying NOT NULL, "typeOfContact" character varying NOT NULL, CONSTRAINT "PK_922933ddef34a7e1ed99ae692ce" PRIMARY KEY ("id"))`
     );
     await queryRunner.query(
-      `CREATE TABLE "walkingapp"."pet_profile" ("id" SERIAL NOT NULL, "isHouseTrained" boolean NOT NULL, "name" character varying NOT NULL, "type" character varying NOT NULL, "breed" character varying NOT NULL, "instagramUrl" character varying NOT NULL, CONSTRAINT "PK_dc9bd94dd249b290f291768433e" PRIMARY KEY ("id"))`
+      `CREATE TABLE "walkingapp"."pet_owner" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "address" character varying NOT NULL, "mobile" character varying NOT NULL, "homePhone" character varying NOT NULL, CONSTRAINT "PK_5116a00f46dd9097ed6bd8dd6a5" PRIMARY KEY ("id"))`
+    );
+    await queryRunner.query(
+      `CREATE TABLE "walkingapp"."pet_profile" ("id" SERIAL NOT NULL, "isHouseTrained" boolean NOT NULL, "name" character varying NOT NULL, "type" character varying NOT NULL, "breed" character varying NOT NULL, "instagramUrl" character varying, CONSTRAINT "PK_dc9bd94dd249b290f291768433e" PRIMARY KEY ("id"))`
     );
     await queryRunner.query(
       `CREATE TABLE "walkingapp"."walker_profile" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "address" character varying NOT NULL, "mobilePhone" character varying NOT NULL, "homePhone" character varying NOT NULL, CONSTRAINT "PK_3b1c8860919d0efbb8ae12e99f6" PRIMARY KEY ("id"))`
@@ -39,10 +42,7 @@ export class ormmigration1655636293153 implements MigrationInterface {
       `CREATE INDEX "IDX_80541d3b7fe3395927d1e894ab" ON "walkingapp"."pet" ("profileId") `
     );
     await queryRunner.query(
-      `CREATE TABLE "walkingapp"."pet_owner" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, CONSTRAINT "PK_5116a00f46dd9097ed6bd8dd6a5" PRIMARY KEY ("id"))`
-    );
-    await queryRunner.query(
-      `CREATE TABLE "walkingapp"."pet_l3" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "ownerName" character varying NOT NULL, CONSTRAINT "PK_a9795cde8d18e656a10f4e3ea07" PRIMARY KEY ("id"))`
+      `CREATE TABLE "lesson3"."pet" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "ownerName" character varying NOT NULL, CONSTRAINT "PK_b1ac2e88e89b9480e0c5b53fa60" PRIMARY KEY ("id"))`
     );
     await queryRunner.query(
       `CREATE TABLE "walkingapp"."emergency_contact_pet" ("petId" integer NOT NULL, "vetId" integer NOT NULL, CONSTRAINT "PK_62b720a72c817fb623487169db9" PRIMARY KEY ("petId", "vetId"))`
@@ -99,8 +99,7 @@ export class ormmigration1655636293153 implements MigrationInterface {
       `DROP INDEX "walkingapp"."IDX_81ed3e576e4c1fa221b1360cd4"`
     );
     await queryRunner.query(`DROP TABLE "walkingapp"."emergency_contact_pet"`);
-    await queryRunner.query(`DROP TABLE "walkingapp"."pet_l3"`);
-    await queryRunner.query(`DROP TABLE "walkingapp"."pet_owner"`);
+    await queryRunner.query(`DROP TABLE "lesson3"."pet"`);
     await queryRunner.query(
       `DROP INDEX "walkingapp"."IDX_80541d3b7fe3395927d1e894ab"`
     );
@@ -123,6 +122,7 @@ export class ormmigration1655636293153 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE "walkingapp"."walking_appointment"`);
     await queryRunner.query(`DROP TABLE "walkingapp"."walker_profile"`);
     await queryRunner.query(`DROP TABLE "walkingapp"."pet_profile"`);
+    await queryRunner.query(`DROP TABLE "walkingapp"."pet_owner"`);
     await queryRunner.query(`DROP TABLE "walkingapp"."emergency_contact"`);
   }
 }

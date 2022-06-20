@@ -108,6 +108,8 @@ describe("When inserting data in multiple tables", () => {
   it("can find appointments", async () => {
     const connection = await AppDataSource.connection();
     const walkerProfileRepository = connection.getRepository(WalkerProfile);
+    const petOwnerRepository = connection.getRepository(PetOwner);
+
     const walkerProfile = await walkerProfileRepository.save({
       address: "some address",
       homePhone: "1234",
@@ -115,11 +117,13 @@ describe("When inserting data in multiple tables", () => {
       name: "darragh",
     });
 
-    const mikePetOWner = await connection
-      .getRepository(PetOwner)
-      .findOneOrFail({ where: { name: mikeName }, relations: { pets: true } });
+    const mikePetOWner = await petOwnerRepository.findOneOrFail({
+      where: { name: mikeName },
+      relations: { pets: true },
+    });
 
     const walkAppointmentRepo = connection.getRepository(WalkingAppointment);
+
     const appointmentToSave = walkAppointmentRepo.create({
       endAt: new Date(2022, 1, 5),
       pet: mikePetOWner.pets[0],
@@ -142,6 +146,29 @@ describe("When inserting data in multiple tables", () => {
     // confirm save
     expect(savedAppointment).not.toBeUndefined();
     expect(savedAppointment2).not.toBeUndefined();
+
+    const maxNextDateQuery = walkAppointmentRepo
+      .createQueryBuilder("mxapts")
+      .select(`max(mxapts."startAt")`)
+      .innerJoin(Pet, "mxpets", `mxapts."petId" = mxpets.id`)
+      .innerJoin(PetProfile, "mxpprofile", `mxpprofile.id = mxpets."profileId"`)
+      .innerJoin(PetOwner, "mxpowner", `mxpowner.id = mxpets."ownerId"`)
+      .where("mxpowner.name = :ownerName", { ownerName: mikeName });
+
+    const appointmentQueryResult = await walkAppointmentRepo
+      .createQueryBuilder("apts")
+      .select(`"pprofile"."name", "apts"."startAt"`)
+      .innerJoin(Pet, "pets", `apts."petId" = pets.id`)
+      .innerJoin(PetProfile, "pprofile", `pprofile.id = pets."profileId"`)
+      .innerJoin(PetOwner, "powner", `powner.id = pets."ownerId"`)
+      .where("powner.name = :ownerName", { ownerName: mikeName })
+      .andWhere(`apts.startAt = (${maxNextDateQuery.getSql()})`)
+      .getRawMany();
+
+    expect(appointmentQueryResult.length).toBe(1);
+    expect(
+      (appointmentQueryResult[0] as { name: string; startAt: string }).name
+    ).toBe("mikes doggo");
   });
 
   afterAll(async () => {

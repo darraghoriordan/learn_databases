@@ -12,8 +12,8 @@ export const connectionSource = new DataSource({
   schema: "walkingapp",
   logging: true,
   synchronize: false,
-  entities: ["**/*.entity.{ts,js}"],
-  migrations: ["**/migrations/*.{ts,js}"],
+  entities: ["src/**/*.entity.ts"],
+  migrations: ["src/migrations/**/*.ts"],
 });
 
 class AppDataSource {

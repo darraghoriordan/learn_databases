@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import AppDataSource from "../database-connection/appDatasource";
 import { cleanAllPetRecords } from "./databaseAdmin";
-import { PetL3 as Pet } from "./models/petl3.entity";
+import { PetL3 as Pet } from "./models/pet.entity";
 
 describe("When updating data in a single table", () => {
   const pet1Name = "spot";

@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-identical-functions */
 import { EntityManager } from "typeorm";
 import AppDataSource from "../database-connection/appDatasource";
+import { clearRecords } from "../lesson4/databaseCleaner";
 import { PetOwner } from "../lesson4/pet-modelling/pet-owner.entity";
 
 const testTransaction = async (): Promise<void> => {
@@ -39,11 +40,7 @@ const testTransaction = async (): Promise<void> => {
 describe("When updating data", () => {
   // first we delete all entries
   beforeAll(async () => {
-    const connection = await AppDataSource.connection();
-    const queryRunner = connection.createQueryRunner();
-    await queryRunner.manager.query("DELETE FROM pet");
-    await queryRunner.manager.query("DELETE FROM pet_owner");
-    await queryRunner.release();
+    await clearRecords();
   });
 
   it("can use a transaction", async () => {
@@ -55,10 +52,6 @@ describe("When updating data", () => {
   });
 
   afterAll(async () => {
-    const connection = await AppDataSource.connection();
-    const queryRunner = connection.createQueryRunner();
-    await queryRunner.manager.query("DELETE FROM pet");
-    await queryRunner.manager.query("DELETE FROM pet_owner");
-    await queryRunner.release();
+    await clearRecords();
   });
 });
